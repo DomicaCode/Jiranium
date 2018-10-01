@@ -99,8 +99,8 @@ function fetchIssues()
 {
     var issues = JSON.parse(localStorage.getItem('issues'));
     var issuesList = document.getElementById('issuesList');
-    issues.push( updateData());
-
+    issues.push(updateData());
+    console.log(issues);
 
     issuesList.innerHTML = '';
   
