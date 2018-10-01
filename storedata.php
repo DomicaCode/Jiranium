@@ -8,7 +8,7 @@ try
     
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $stmt = $conn->prepase("SELECT * FROM users");
+    $stmt = $conn->prepare("SELECT * FROM users");
     $stmt->execute();
     $stmt->setFetchMode(PDO::FETCH_ASSOC); 
     $result = $stmt->fetch();
@@ -19,6 +19,7 @@ catch(PDOException $e)
 }
 
 $conn = null;
-echo json_decode($result);
+//print_r($result);
+echo json_encode($result);
 
 ?>

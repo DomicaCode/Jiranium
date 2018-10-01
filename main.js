@@ -72,7 +72,7 @@ function updateData()
               console.log(issues);
 	    }
 	};
-	xhttp.open("GET", "http://domica.xyz/jiranium/storedata.php", true);
+	xhttp.open("GET", "https://domica.xyz/jiranium/storedata.php", true);
 	xhttp.send();
 }
 
