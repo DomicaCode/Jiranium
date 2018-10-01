@@ -1,5 +1,6 @@
 document.getElementById('issueInputForm').addEventListener('submit', saveIssue);
 
+
 function saveIssue(e) {
   var issueDesc = document.getElementById('issueDescInput').value;
   var issueSeverity = document.getElementById('issueSeverityInput').value;
@@ -68,7 +69,7 @@ function updateData()
                 assignedTo: data['user_id'],
                 status: data['user_id']
               }
-              issues.push(issue);
+              return issue;
               console.log(issues);
 	    }
 	};
@@ -98,8 +99,8 @@ function fetchIssues()
 {
     var issues = JSON.parse(localStorage.getItem('issues'));
     var issuesList = document.getElementById('issuesList');
+    issues.push( updateData());
 
-    updateData();
 
     issuesList.innerHTML = '';
   
