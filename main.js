@@ -53,6 +53,26 @@ function setStatusClosed(e, id)
     fetchIssues();
 }
 
+function updateData()
+{
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+
+            var data = JSON.parse(xhttp.responseText);
+            var issue = {
+                id: data['user_id'],
+                description: data['user_frist'],
+                severity: data['user_last'],
+                assignedTo: data['user_id'],
+                status: data['user_id']
+              }
+	    }
+	};
+	xhttp.open("GET", "https://domica.xyz/jiranium/storedata.php", true);
+	xhttp.send();
+}
+
 function deleteIssue(e, id)
 {
     var issues = JSON.parse(localStorage.getItem('issues'));
@@ -79,20 +99,16 @@ function fetchIssues()
     issuesList.innerHTML = '';
   
     for (var i = 0; i < issues.length; i++) {
-      var id = issues[i].id;
-      var desc = issues[i].description;
-      var severity = issues[i].severity;
-      var assignedTo = issues[i].assignedTo;
-      var status = issues[i].status;
   
       issuesList.innerHTML +=   '<div class="well">'+
-                                '<h6>Issue ID: ' + id + '</h6>'+
-                                '<p><span class="label label-info">' + status + '</span></p>'+
-                                '<h3>' + desc + '</h3>'+
-                                '<p><span class="glyphicon glyphicon-time"></span> ' + severity + '</p>'+
-                                '<p><span class="glyphicon glyphicon-user"></span> ' + assignedTo + '</p>'+
-                                '<a href="#" onclick="setStatusClosed(event, \''+id+'\')" class="btn btn-warning">Zatvori</a> '+
-                                '<a href="#" onclick="deleteIssue(event, \''+id+'\')" class="btn btn-danger">Obrisi</a>'+
+                                '<h6>Issue ID: ' + issues[i].id + '</h6>'+
+                                '<p><span class="label label-info">' + issues[i].status + '</span></p>'+
+                                '<h3>' + issues[i].description + '</h3>'+
+                                '<p><span class="glyphicon glyphicon-time"></span> ' + issues[i].severity + '</p>'+
+                                '<p><span class="glyphicon glyphicon-user"></span> ' + issues[i].assignedTo + '</p>'+
+                                '<a href="#" onclick="setStatusClosed(event, \''+issues[i].id+'\')" class="btn btn-warning">Zatvori</a> '+
+                                '<a href="#" onclick="deleteIssue(event, \''+issues[i].id+'\')" class="btn btn-danger">Obrisi</a>'+
                                 '</div>';
     }
+    updateData();
   }
