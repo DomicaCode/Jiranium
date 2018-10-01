@@ -35,7 +35,7 @@ function saveIssue(e) {
   e.preventDefault();
 }
 
-function setStatusClosed(id)
+function setStatusClosed(e, id)
 {
     var issues = JSON.parse(localStorage.getItem('issues'));
 
@@ -49,10 +49,11 @@ function setStatusClosed(id)
 
     localStorage.setItem('issues', JSON.stringify(issues));
 
+    e.preventDefault();
     fetchIssues();
 }
 
-function deleteIssue(id)
+function deleteIssue(e, id)
 {
     var issues = JSON.parse(localStorage.getItem('issues'));
 
@@ -66,6 +67,7 @@ function deleteIssue(id)
 
     localStorage.setItem('issues', JSON.stringify(issues));
 
+    e.preventDefault();
     fetchIssues();
 }
 
@@ -89,8 +91,8 @@ function fetchIssues()
                                 '<h3>' + desc + '</h3>'+
                                 '<p><span class="glyphicon glyphicon-time"></span> ' + severity + '</p>'+
                                 '<p><span class="glyphicon glyphicon-user"></span> ' + assignedTo + '</p>'+
-                                '<a href="#" onclick="setStatusClosed(\''+id+'\')" class="btn btn-warning">Zatvori</a> '+
-                                '<a href="#" onclick="deleteIssue(\''+id+'\')" class="btn btn-danger">Obrisi</a>'+
+                                '<a href="#" onclick="setStatusClosed(event, \''+id+'\')" class="btn btn-warning">Zatvori</a> '+
+                                '<a href="#" onclick="deleteIssue(event, \''+id+'\')" class="btn btn-danger">Obrisi</a>'+
                                 '</div>';
     }
   }
