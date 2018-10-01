@@ -58,7 +58,8 @@ function updateData()
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 	    if (this.readyState == 4 && this.status == 200) {
-
+            
+            console.log(xhttp.responseText);
             var data = JSON.parse(xhttp.responseText);
             var issue = {
                 id: data['user_id'],
@@ -67,9 +68,11 @@ function updateData()
                 assignedTo: data['user_id'],
                 status: data['user_id']
               }
+              issues.push(issue);
+              console.log(issues);
 	    }
 	};
-	xhttp.open("GET", "https://domica.xyz/jiranium/storedata.php", true);
+	xhttp.open("GET", "http://domica.xyz/jiranium/storedata.php", true);
 	xhttp.send();
 }
 
@@ -95,7 +98,9 @@ function fetchIssues()
 {
     var issues = JSON.parse(localStorage.getItem('issues'));
     var issuesList = document.getElementById('issuesList');
-  
+
+    updateData();
+
     issuesList.innerHTML = '';
   
     for (var i = 0; i < issues.length; i++) {
@@ -109,6 +114,6 @@ function fetchIssues()
                                 '<a href="#" onclick="setStatusClosed(event, \''+issues[i].id+'\')" class="btn btn-warning">Zatvori</a> '+
                                 '<a href="#" onclick="deleteIssue(event, \''+issues[i].id+'\')" class="btn btn-danger">Obrisi</a>'+
                                 '</div>';
+    
     }
-    updateData();
-  }
+}

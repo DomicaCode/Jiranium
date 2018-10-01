@@ -8,7 +8,7 @@ try
     
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $stmt = $conn->prepase("SELECT * FROM users")
+    $stmt = $conn->prepase("SELECT * FROM users");
     $stmt->execute();
     $stmt->setFetchMode(PDO::FETCH_ASSOC); 
     $result = $stmt->fetch();
